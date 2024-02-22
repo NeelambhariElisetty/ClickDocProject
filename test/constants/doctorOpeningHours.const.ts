@@ -10,4 +10,4 @@ const DoctorAvailabilityOpeningHours = {
 
 export {
     DoctorAvailabilityOpeningHours
-}
+};

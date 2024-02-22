@@ -1,9 +1,5 @@
 import { Page } from "./page.ts";
 
-/**
-* main page object containing all methods, selectors and functionality
-* that is shared across all page objects
-*/
 export class ClickDocHomePage extends Page {
 
     get parentLocator() {
@@ -34,7 +30,6 @@ export class ClickDocHomePage extends Page {
         await this.doctorAddressSearchBox.setValue(address);
         await this.homePageFindButton.click();
     }
-
 }
 
 export default new ClickDocHomePage();

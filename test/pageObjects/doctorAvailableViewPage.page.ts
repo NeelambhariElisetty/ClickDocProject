@@ -3,8 +3,6 @@ import { ChainablePromiseElement } from 'webdriverio';
 import { CurrentDayOpeningHours } from '../interfaces/currentDayOpeningHours';
 import { Page } from './page.ts';
 
-
-
 export class DoctorAvailableViewPage extends Page {
     get parentLocator() {
         return browser.$('app-physician-profile-container');
@@ -87,8 +85,7 @@ export class DoctorAvailableViewPage extends Page {
         const currMorningEndTime = await getTextPromise(this.currentDayMorningEndTime);
         const currAfterNoonStartTime = await getTextPromise(this.currentDayAfterNoonStartTime);
         const currAfterNoonEndTime = await getTextPromise(this.currentDayAfterNoonEndTime);
-
-
+        
         if (day === 'Wednesday') {
 
             return {
@@ -114,6 +111,5 @@ export class DoctorAvailableViewPage extends Page {
             currAftNoonEndTime: currAfterNoonEndTime
         };
     }
-
 }
 export default new DoctorAvailableViewPage();

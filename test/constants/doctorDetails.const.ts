@@ -4,5 +4,7 @@ enum DoctorDetails {
     AVAILABLE_MONTH = "Feb. 2024",
     FINDEN_COLOUR = "rgba(244,244,244,1)",
     APPOINTMENT_COLOUR = "rgba(0,0,0,0)"
-}
-export { DoctorDetails };
+};
+export {
+    DoctorDetails
+};

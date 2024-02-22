@@ -7,6 +7,6 @@ export class Helpers {
     async WaitForElementClick(locator: any) {
         await locator.waitForClickable({ timeout: 2000 })
     }
-}
+};
 
 export default new Helpers();

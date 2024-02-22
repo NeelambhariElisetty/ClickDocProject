@@ -2,7 +2,6 @@ import { browser } from '@wdio/globals'
 import { ChainablePromiseElement } from 'webdriverio';
 import { Page } from './page.ts';
 
-
 export class DoctorListViewPage extends Page {
     get parentLocator() {
         return browser.$('app-search-results-container');
