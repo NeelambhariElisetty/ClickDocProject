@@ -9,7 +9,9 @@ npm install
 ## Run tests
 
 npm run pretest
+
 npm run wdio
+
 npm run allure-report-generate
 
 ## Author
