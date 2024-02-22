@@ -10,16 +10,16 @@ describe('CLICKDOC Test', () => {
     describe('Validate Doctor Details in Doctor List Page', () => {
         before(async () => {
             await ClickDocHomePage.navigateToClickDoc();
-            await Helpers.WaitForElementDisplay(ClickDocHomePage.cookieLocator);
+            await Helpers.WaitForElementDisplay(ClickDocHomePage.cookieLocator, 5000);
             await ClickDocHomePage.acceptCookies();
             await Helpers.WaitForElementClick(ClickDocHomePage.homePageFindButton);
-            await ClickDocHomePage.searchForDoctorbyNameandAddress(DoctorDetails.DOCTOR_NAME, DoctorDetails.DOCTOR_ADDRESS);
+            await ClickDocHomePage.searchForDoctorByNameAndAddress(DoctorDetails.DOCTOR_NAME, DoctorDetails.DOCTOR_ADDRESS);
         });
-        it('Validate Peter Wunderlich physician view was displayed as first in the list of results', async () => {
-            await Helpers.WaitForElementDisplay(DoctorListViewPage.doctorListViewFilter);
+        it('Validate Peter Wunderlich doctor view was displayed as first in the list of results', async () => {
+            await Helpers.WaitForElementDisplay(DoctorListViewPage.doctorListViewFilter, 10000);
             expect(await DoctorListViewPage.getDoctorNameByIndex(0)).toBe(DoctorDetails.DOCTOR_NAME);
         });
-        it('Validate physician name and address ', async () => {
+        it('Validate Doctor name and address ', async () => {
             expect((await DoctorListViewPage.getDoctorNameByName(DoctorDetails.DOCTOR_NAME)).isDisplayed()).toBeTruthy();
             expect((await DoctorListViewPage.getDoctorAddressByName(DoctorDetails.DOCTOR_ADDRESS)).isDisplayed()).toBeTruthy();
         });
@@ -34,32 +34,32 @@ describe('CLICKDOC Test', () => {
         })
 
     });
-    describe('Validate Doctor details and Opening hours in Doctor Details view page', () => {
+    describe('Validate Doctor details and Opening hours in Doctor details view page', () => {
         before(async () => {
             //I am using the url to surpass captcha
             await DoctorAvailableViewPage.navigateToDoctorDetailsPage();
-            await Helpers.WaitForElementDisplay(doctorAvailableViewPagePage.profileContact);
+            await Helpers.WaitForElementDisplay(doctorAvailableViewPagePage.profileContact, 10000);
         });
-        it('Validate physician name and address ', async () => {
+        it('Validate Doctor name and address ', async () => {
             expect(await DoctorAvailableViewPage.getDoctorName()).toBe(DoctorDetails.DOCTOR_NAME);
             expect(await DoctorAvailableViewPage.getDoctorAddress()).toContain(DoctorDetails.DOCTOR_ADDRESS);
         });
         it('Validate the current day opening hours from contact section', async () => {
             let currentDay = DoctorAvailableViewPage.getCurrentDay();
-            const currentDayHours = await DoctorAvailableViewPage.getCurrentDayOpeningHours(currentDay, DoctorAvailabilityOpeningHours.VALIDATE_OPENING_HOURS);
-            expect(currentDayHours.currMorStartTime).toBe(DoctorAvailabilityOpeningHours.MORNING_START_TIME);
-            expect(currentDayHours.currMorEndTime).toBe(DoctorAvailabilityOpeningHours.MORNING_END_TIME);
-            expect(currentDayHours.currAftStartTime).toBe(DoctorAvailabilityOpeningHours.AFTERNOON_START_TIME);
-            expect(currentDayHours.currAftNoonEndTime).toBe(DoctorAvailabilityOpeningHours.AFTERNOON_END_TIME);
+            const currentDayHours = await DoctorAvailableViewPage.getCurrentDayOpeningHours(currentDay);
+            if (currentDay === "Wednesday") {
+                expect(currentDayHours.currMorStartTime).toBe(DoctorAvailabilityOpeningHours.MORNING_START_TIME);
+                expect(currentDayHours.currMorEndTime).toBe(DoctorAvailabilityOpeningHours.MORNING_WED_END_TIME);
+            } else {
+                expect(currentDayHours.currMorStartTime).toBe(DoctorAvailabilityOpeningHours.MORNING_START_TIME);
+                expect(currentDayHours.currMorEndTime).toBe(DoctorAvailabilityOpeningHours.MORNING_END_TIME);
+                expect(currentDayHours.currAftStartTime).toBe(DoctorAvailabilityOpeningHours.AFTERNOON_START_TIME);
+                expect(currentDayHours.currAftNoonEndTime).toBe(DoctorAvailabilityOpeningHours.AFTERNOON_END_TIME);
+            }
+
         });
         it('Validate the current day is shown in bold', async () => {
-            let currentDay = DoctorAvailableViewPage.getCurrentDay();
-            const currentDayHours = await DoctorAvailableViewPage.getCurrentDayOpeningHours(currentDay, DoctorAvailabilityOpeningHours.VALIDATE_FONT_STYLE);
-            expect(currentDayHours.currMorStartTime).toBe(DoctorAvailabilityOpeningHours.OPENING_HOURS_FONT_STYLE)
-            expect(currentDayHours.currMorEndTime).toBe(DoctorAvailabilityOpeningHours.OPENING_HOURS_FONT_STYLE)
-            expect(currentDayHours.currAftStartTime).toBe(DoctorAvailabilityOpeningHours.OPENING_HOURS_FONT_STYLE)
-            expect(currentDayHours.currAftNoonEndTime).toBe(DoctorAvailabilityOpeningHours.OPENING_HOURS_FONT_STYLE)
-
+            expect((await (await DoctorAvailableViewPage.currentWeekDay).getCSSProperty('font-weight')).value).toBe(DoctorAvailabilityOpeningHours.OPENING_HOURS_FONT_STYLE);
         });
     });
 })

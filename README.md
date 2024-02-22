@@ -4,7 +4,7 @@
 
 ## Install
 
-npm install
+npm install or yarn 
 
 ## Run tests
 

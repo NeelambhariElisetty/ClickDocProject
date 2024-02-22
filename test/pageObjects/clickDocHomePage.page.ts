@@ -13,9 +13,9 @@ export class ClickDocHomePage extends Page {
         return browser.$('cd-modal-wrapper [id*="dialog"]')
     }
 
-    async acceptCookies() {
+    async acceptCookies(): Promise<void> {
         await this.cookieLocator.$('.agree-consent--all').click();
-    }
+    };
     get doctorNameSearchBox() {
         return this.parentLocator.$('[data-web-test="lp-search-input"]');
     }
@@ -25,7 +25,7 @@ export class ClickDocHomePage extends Page {
     get homePageFindButton() {
         return this.parentLocator.$('#search-button');
     }
-    async searchForDoctorbyNameandAddress(name: string, address: string) {
+    async searchForDoctorByNameAndAddress(name: string, address: string): Promise<void> {
         await this.doctorNameSearchBox.setValue(name);
         await this.doctorAddressSearchBox.setValue(address);
         await this.homePageFindButton.click();

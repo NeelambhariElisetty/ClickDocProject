@@ -22,11 +22,11 @@ export class DoctorAvailableViewPage extends Page {
         return this.parentLocator.$('[data-web-test="address-link"]');
     }
 
-    async getDoctorName() {
+    async getDoctorName(): Promise<string> {
         return (await this.DoctorName).getText();
-    }
+    };
 
-    async getDoctorAddress() {
+    async getDoctorAddress(): Promise<string> {
         return (await this.DoctorAddress).getText();
     }
     get currDayMorLoc(): string {
@@ -73,19 +73,17 @@ export class DoctorAvailableViewPage extends Page {
         return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][new Date().getDay()];
     }
 
-    async getCurrentDayOpeningHours(day: string, input: string): Promise<CurrentDayOpeningHours> {
-        let getTextPromise: any;
-        if (input == "Time") {
-            getTextPromise = async (element: ChainablePromiseElement<WebdriverIO.Element>) => await element.getText();
-        }
-        else if (input == 'Font') {
-            getTextPromise = async (element: ChainablePromiseElement<WebdriverIO.Element>) => (await element.getCSSProperty('font-weight')).value;
-        }
+    get currentWeekDay() {
+        return this.parentLocator.$('.text-day__item--text.current-date');
+    }
+
+    async getCurrentDayOpeningHours(day: string): Promise<CurrentDayOpeningHours> {
+        const getTextPromise = async (element: ChainablePromiseElement<WebdriverIO.Element>) => await element.getText();
         const currMorningStartTime = await getTextPromise(this.currentDayMorningStartTime);
         const currMorningEndTime = await getTextPromise(this.currentDayMorningEndTime);
         const currAfterNoonStartTime = await getTextPromise(this.currentDayAfterNoonStartTime);
         const currAfterNoonEndTime = await getTextPromise(this.currentDayAfterNoonEndTime);
-        
+
         if (day === 'Wednesday') {
 
             return {
@@ -94,22 +92,13 @@ export class DoctorAvailableViewPage extends Page {
                 currAftStartTime: this.NoOpeningHoursOnWednesDayAfterNoon,
                 currAftNoonEndTime: this.NoOpeningHoursOnWednesDayAfterNoon
             };
-        }
-
-        if (day === 'Saturday' || day === 'Sunday') {
-            return {
-                currMorStartTime: this.NoOpeningHoursOnWeekend,
-                currMorEndTime: this.NoOpeningHoursOnWeekend,
-                currAftStartTime: this.NoOpeningHoursOnWeekend,
-                currAftNoonEndTime: this.NoOpeningHoursOnWeekend
-            };
-        }
+        };
         return {
             currMorStartTime: currMorningStartTime,
             currMorEndTime: currMorningEndTime,
             currAftStartTime: currAfterNoonStartTime,
             currAftNoonEndTime: currAfterNoonEndTime
         };
-    }
-}
+    };
+};
 export default new DoctorAvailableViewPage();

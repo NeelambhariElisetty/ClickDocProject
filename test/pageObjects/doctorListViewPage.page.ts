@@ -11,12 +11,12 @@ export class DoctorListViewPage extends Page {
         return this.parentLocator.$('.icon.icon-cd_filter.filters-search-btn');
     }
 
-    cards(index: number) {
+    cardsByIndex(index: number) {
         return this.parentLocator.$(`#card-${index}`);
     }
 
     async getDoctorNameByIndex(index: number): Promise<string> {
-        return await this.cards(index).$('cd-list-entry-headline').getText();
+        return await this.cardsByIndex(index).$('cd-list-entry-headline').getText();
     }
 
     getDoctorCardByName(name: string): ChainablePromiseElement<WebdriverIO.Element> {
@@ -48,10 +48,8 @@ export class DoctorListViewPage extends Page {
     }
 
     async getOnlineBookingButtonColour(name: string): Promise<string> {
-        const colour = (await this.getDoctorCardByName(name).$("//button[contains(@class,'book-appointment-button')]").getCSSProperty('background-color')).value;
+        const colour = (await this.getDoctorCardByName(name).$('cd-abstract-button').getCSSProperty('background-color')).value;
         return colour ? colour : "No Colour Found";
     }
-
-
 }
 export default new DoctorListViewPage();
