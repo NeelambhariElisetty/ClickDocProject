@@ -11,7 +11,7 @@ export class DoctorListViewPage extends Page {
     get doctorListViewFilter() {
         return this.parentLocator.$('.icon.icon-cd_filter.filters-search-btn');
     }
-    
+
     cards(index: number) {
         return this.parentLocator.$(`#card-${index}`);
     }

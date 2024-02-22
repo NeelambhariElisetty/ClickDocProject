@@ -46,15 +46,15 @@ describe('CLICKDOC Test', () => {
         });
         it('Validate the current day opening hours from contact section', async () => {
             let currentDay = DoctorAvailableViewPage.getCurrentDay();
-            const currentDayHours = await DoctorAvailableViewPage.getCurrentDayOpeningHours(currentDay,DoctorAvailabilityOpeningHours.VALIDATE_OPENING_HOURS);
+            const currentDayHours = await DoctorAvailableViewPage.getCurrentDayOpeningHours(currentDay, DoctorAvailabilityOpeningHours.VALIDATE_OPENING_HOURS);
             expect(currentDayHours.currMorStartTime).toBe(DoctorAvailabilityOpeningHours.MORNING_START_TIME);
             expect(currentDayHours.currMorEndTime).toBe(DoctorAvailabilityOpeningHours.MORNING_END_TIME);
             expect(currentDayHours.currAftStartTime).toBe(DoctorAvailabilityOpeningHours.AFTERNOON_START_TIME);
             expect(currentDayHours.currAftNoonEndTime).toBe(DoctorAvailabilityOpeningHours.AFTERNOON_END_TIME);
         });
-        it('Validate the current day is shown in bold',async()=>{
+        it('Validate the current day is shown in bold', async () => {
             let currentDay = DoctorAvailableViewPage.getCurrentDay();
-            const currentDayHours = await DoctorAvailableViewPage.getCurrentDayOpeningHours(currentDay,DoctorAvailabilityOpeningHours.VALIDATE_FONT_STYLE);
+            const currentDayHours = await DoctorAvailableViewPage.getCurrentDayOpeningHours(currentDay, DoctorAvailabilityOpeningHours.VALIDATE_FONT_STYLE);
             expect(currentDayHours.currMorStartTime).toBe(DoctorAvailabilityOpeningHours.OPENING_HOURS_FONT_STYLE)
             expect(currentDayHours.currMorEndTime).toBe(DoctorAvailabilityOpeningHours.OPENING_HOURS_FONT_STYLE)
             expect(currentDayHours.currAftStartTime).toBe(DoctorAvailabilityOpeningHours.OPENING_HOURS_FONT_STYLE)

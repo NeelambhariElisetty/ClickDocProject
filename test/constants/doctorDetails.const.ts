@@ -1,4 +1,4 @@
-enum DoctorDetails  {
+enum DoctorDetails {
     DOCTOR_NAME = "Peter Wunderlich",
     DOCTOR_ADDRESS = "Testhausen",
     AVAILABLE_MONTH = "Feb. 2024",

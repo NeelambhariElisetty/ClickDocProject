@@ -18,7 +18,7 @@ export class ClickDocHomePage extends Page {
     }
 
     async acceptCookies() {
-         await this.cookieLocator.$('.agree-consent--all').click();
+        await this.cookieLocator.$('.agree-consent--all').click();
     }
     get doctorNameSearchBox() {
         return this.parentLocator.$('[data-web-test="lp-search-input"]');
