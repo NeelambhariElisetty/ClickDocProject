@@ -56,7 +56,6 @@ describe('CLICKDOC Test', () => {
                 expect(currentDayHours.currAftStartTime).toBe(DoctorAvailabilityOpeningHours.AFTERNOON_START_TIME);
                 expect(currentDayHours.currAftNoonEndTime).toBe(DoctorAvailabilityOpeningHours.AFTERNOON_END_TIME);
             }
-
         });
         it('Validate the current day is shown in bold', async () => {
             expect((await (await DoctorAvailableViewPage.currentWeekDay).getCSSProperty('font-weight')).value).toBe(DoctorAvailabilityOpeningHours.OPENING_HOURS_FONT_STYLE);
