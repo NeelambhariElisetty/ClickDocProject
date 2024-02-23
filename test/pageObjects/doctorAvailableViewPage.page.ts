@@ -61,10 +61,6 @@ export class DoctorAvailableViewPage extends Page {
         return this.parentLocator.$(`${this.currDayAftLoc} ${this.endTime}`);
     }
 
-    get NoOpeningHoursOnWeekend(): string {
-        return 'No Opening hours found on Weekends!';
-    }
-
     get NoOpeningHoursOnWednesDayAfterNoon(): string {
         return 'No Opening hours found on Wednesday afternoon!';
     }
@@ -91,14 +87,6 @@ export class DoctorAvailableViewPage extends Page {
                 currMorEndTime: currMorningEndTime,
                 currAftStartTime: this.NoOpeningHoursOnWednesDayAfterNoon,
                 currAftNoonEndTime: this.NoOpeningHoursOnWednesDayAfterNoon
-            };
-        };
-        if (day === 'Saturday' || day === 'Sunday') {
-            return {
-                currMorStartTime: this.NoOpeningHoursOnWeekend,
-                currMorEndTime: this.NoOpeningHoursOnWeekend,
-                currAftStartTime: this.NoOpeningHoursOnWeekend,
-                currAftNoonEndTime: this.NoOpeningHoursOnWeekend
             };
         };
         return {
